@@ -124,8 +124,10 @@ class SystemTray:
         :param message: Main message to be displayed
         :type message: str
         """
-        #self.tray_icon.notify(title=str(title) if title is not None else '', message=str(message) if message is not None else '')
-        pass # Not working under X11/Linux
+        try:
+            self.tray_icon.notify(title=str(title) if title is not None else '', message=str(message) if message is not None else '')
+        except NotImplementedError:
+            pass # Not working under X11/Linux
     
     def close(self):
         """
